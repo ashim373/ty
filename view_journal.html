@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journal Details</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9fafb;
+    }
+
+    header {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: 20px auto;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 24px;
+      text-align: center;
+      color: #34495e;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+
+    .timestamp {
+      font-size: 12px;
+      color: #7f8c8d;
+      text-align: right;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h3>Journal Details</h3>
+  </header>
+
+  <main id="journal-details">
+    <!-- Dynamic journal content will appear here -->
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Dostel. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Get journal index from query params
+    const urlParams = new URLSearchParams(window.location.search);
+    const index = urlParams.get('index');
+
+    // Load journals from localStorage
+    const journals = JSON.parse(localStorage.getItem('blogs')) || [];
+
+    const journalDetails = document.getElementById('journal-details');
+
+    if (!index || !journals[index]) {
+      journalDetails.innerHTML = '<p>Journal not found.</p>';
+    } else {
+      const journal = journals[index];
+      journalDetails.innerHTML = `
+        <h1>${journal.title}</h1>
+        ${journal.content.map(paragraph => `<p>${paragraph}</p>`).join('')}
+        <p class="timestamp">Posted on: ${new Date(journal.createdAt).toLocaleString()}</p>
+      `;
+    }
+  </script>
+</body>
+</html>

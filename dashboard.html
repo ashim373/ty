@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="dashboard-header">
+    <h1>Blog Dashboard</h1>
+    <div class="header-buttons">
+      <button id="create-post-btn" class="create-button">+ Create New Post</button>
+      <button id="view-blogs-btn" class="view-blogs-button">View Blogs</button>
+      <button id="edit-posts-btn" class="edit-button">Edit Posts</button>
+    </div>
+  </header>
+
+  <main class="dashboard-container">
+    <section id="post-list" style="display: none;">
+      <h2>Edit Your Blogs</h2>
+      <ul id="posts-container">
+        <!-- Blog list items will be dynamically generated here -->
+      </ul>
+    </section>
+  </main>
+
+  <footer class="dashboard-footer">
+    <p>&copy; 2024 Blog Dashboard. All rights reserved.</p>
+  </footer>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

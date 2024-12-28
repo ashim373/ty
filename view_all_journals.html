@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Journals</title>
+  <link rel="stylesheet" href="styleq.css">
+</head>
+<body>
+  <header>
+    <h1>All Journals</h1>
+  </header>
+
+  <main id="all-journals-container">
+    <!-- Journals will be dynamically populated here -->
+    <p>Loading journals...</p>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Blog Dashboard. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Fetch all blogs from localStorage
+    const blogs = JSON.parse(localStorage.getItem('blogs')) || [];
+    
+    const container = document.getElementById('all-journals-container');
+    container.innerHTML = ''; // Clear loading message
+    
+    if (blogs.length === 0) {
+      container.innerHTML = '<p>No journals found. Create some in the Dashboard.</p>';
+    } else {
+      blogs.forEach((blog, index) => {
+        const previewText = blog.content.join(' ').substring(0, 100) + '...'; // Short preview
+        const displayedIndex = blogs.length - 1 - index; // Reversed display order
+        const postElement = document.createElement('div');
+        postElement.classList.add('journal-preview');
+        postElement.innerHTML = `
+          <h2>${blogs[displayedIndex].title}</h2>
+          <p>${previewText}</p>
+          <button class="read-more-btn" onclick="readJournal(${displayedIndex})">Read More</button>
+        `;
+        container.appendChild(postElement);
+      });
+    }
+    
+    function readJournal(index) {
+      console.log("Selected blog index:", index); // Debugging: Log selected index
+      localStorage.setItem('selectedBlogIndex', index);
+      // Redirect to the main reading page (index.html)
+      window.location.href = 'index.html';
+    }
+  </script>
+  
+  
+  
+</body>
+</html>
